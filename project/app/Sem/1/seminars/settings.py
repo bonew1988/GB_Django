@@ -129,12 +129,11 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '[{levelname:<8}: {name:>25}] - {asctime} : {funcName} @ {lineno:04d}: {message}',
+            'format': '[{levelname:<8}: {name:>25}] - {asctime} : {funcName} @\
+{lineno:04d}: {message}',
             'style': '{',
         },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
+        'simple': {'format': '%(levelname)s %(message)s'},
     },
     'handlers': {
         'console': {
