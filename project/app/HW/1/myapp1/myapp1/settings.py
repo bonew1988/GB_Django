@@ -131,7 +131,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../../1/logs/log.txt',
+            'filename': '../logs/log.txt',
         },
     },
     'loggers': {
