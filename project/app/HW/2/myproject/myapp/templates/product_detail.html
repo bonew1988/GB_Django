@@ -1,0 +1,15 @@
+<!-- myapp/templates/product_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Product Detail{% endblock %}
+
+{% block header %}Детилизация продукта{% endblock %}
+
+{% block content %}
+    <h2>{{ object.name }}</h2>
+    <p>Описание: {{ object.description }}</p>
+    <p>Цена: {{ object.price }}</p>
+    <p>Количество: {{ object.quantity }}</p>
+    <p>Дата добавления: {{ object.added_date }}</p>
+{% endblock %}

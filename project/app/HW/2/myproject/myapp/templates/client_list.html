@@ -1,0 +1,16 @@
+<!-- myapp/templates/client_list.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Client List{% endblock %}
+
+{% block header %}Клиенты{% endblock %}
+
+{% block content %}
+    <h2>Список клиентов</h2>
+    <ul>
+        {% for client in object_list %}
+            <li><a href="{% url 'client_detail' pk=client.pk %}">{{ client.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

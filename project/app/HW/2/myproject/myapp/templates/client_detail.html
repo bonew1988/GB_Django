@@ -1,0 +1,15 @@
+<!-- myapp/templates/client_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Client Detail{% endblock %}
+
+{% block header %}Client Detail{% endblock %}
+
+{% block content %}
+    <h2>{{ object.name }}</h2>
+    <p>Email: {{ object.email }}</p>
+    <p>Номер телефона: {{ object.phone_number }}</p>
+    <p>Адрес: {{ object.address }}</p>
+    <p>Дата регистрации: {{ object.registration_date }}</p>
+{% endblock %}

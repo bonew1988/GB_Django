@@ -1,0 +1,30 @@
+<!-- myapp/templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Интернет магазин{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>{% block header %}Интернет магазин{% endblock %}</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'client_list' %}">Клиенты</a></li>
+                <li><a href="{% url 'product_list' %}">Продукты</a></li>
+                <li><a href="{% url 'order_list' %}">Заказы</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Интернет магазин</p>
+    </footer>
+</body>
+</html>

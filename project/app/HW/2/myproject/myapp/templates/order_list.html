@@ -1,0 +1,16 @@
+<!-- myapp/templates/order_list.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Order List{% endblock %}
+
+{% block header %}Заказы{% endblock %}
+
+{% block content %}
+    <h2>Список заказов</h2>
+    <ul>
+        {% for order in object_list %}
+            <li><a href="{% url 'order_detail' pk=order.pk %}">Заказ #{{ order.id }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
