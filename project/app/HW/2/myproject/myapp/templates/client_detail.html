@@ -2,14 +2,41 @@
 
 {% extends 'base.html' %}
 
-{% block title %}Client Detail{% endblock %}
+{% block title %}{{ object.name }}{% endblock %}
 
-{% block header %}Client Detail{% endblock %}
+{% block header %}{{ object.name }}{% endblock %}
 
 {% block content %}
-    <h2>{{ object.name }}</h2>
-    <p>Email: {{ object.email }}</p>
-    <p>Номер телефона: {{ object.phone_number }}</p>
-    <p>Адрес: {{ object.address }}</p>
-    <p>Дата регистрации: {{ object.registration_date }}</p>
+    <section>
+        <h2>Детали для {{ object.name }}</h2>
+        <p>Email: {{ object.email }}</p>
+        <p>Номер телефона: {{ object.phone_number }}</p>
+        <p>Адрес: {{ object.address }}</p>
+        <p>Дата регистрации: {{ object.registration_date }}</p>
+    </section>
+
+    <section>
+        <h2>Заказанные товары</h2>
+
+        <h3>Последние 7 дней</h3>
+        <ul>
+            {% for product in products_last_week %}
+                <li>{{ product.name }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Последние 30 дней</h3>
+        <ul>
+            {% for product in products_last_month %}
+                <li>{{ product.name }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Последние 365 дней</h3>
+        <ul>
+            {% for product in products_last_year %}
+                <li>{{ product.name }}</li>
+            {% endfor %}
+        </ul>
+    </section>
 {% endblock %}

@@ -43,14 +43,14 @@ def create_orders(num_orders):
         order = Order.objects.create(
             client=fake.random_element(clients),
             total_amount=fake.random_number(3),
-            order_date=fake.date_this_decade(),
+            order_date=fake.date_this_year(),
         )
         order.products.set(fake.random_elements(elements=products, length=fake.random_int(min=1, max=5)))
 
 if __name__ == "__main__":
-    num_clients = 10
-    num_products = 20
-    num_orders = 30
+    num_clients = 100
+    num_products = 2000
+    num_orders = 400
 
     create_clients(num_clients)
     create_products(num_products)
