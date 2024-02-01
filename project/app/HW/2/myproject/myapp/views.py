@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.utils import timezone
 from datetime import timedelta
 from .models import Client, Product, Order
+from .forms import ProductForm
 
 
 class ClientListView(ListView):
@@ -24,9 +25,12 @@ class ClientDetailView(DetailView):
         one_year_ago = today - timedelta(days=365)
 
         # Get unique products ordered by the client within the specified time intervals
-        context['products_last_week'] = Product.objects.filter(order__client=self.object, order__order_date__gte=one_week_ago).distinct()
-        context['products_last_month'] = Product.objects.filter(order__client=self.object, order__order_date__gte=one_month_ago).distinct()
-        context['products_last_year'] = Product.objects.filter(order__client=self.object, order__order_date__gte=one_year_ago).distinct()
+        context['products_last_week'] = Product.objects.filter(
+            order__client=self.object, order__order_date__gte=one_week_ago).distinct()
+        context['products_last_month'] = Product.objects.filter(
+            order__client=self.object, order__order_date__gte=one_month_ago).distinct()
+        context['products_last_year'] = Product.objects.filter(
+            order__client=self.object, order__order_date__gte=one_year_ago).distinct()
 
         return context
 
@@ -76,3 +80,29 @@ def client_ordered_products(request, client_id):
     }
 
     return render(request, 'client_ordered_products.html', context)
+
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')  # Перенаправление после успешного сохранения
+    else:
+        form = ProductForm()
+
+    return render(request, 'product_create.html', {'form': form})
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+
+    else:
+        form = ProductForm(instance=product)
+
+    return render(request, 'myapp/product_detail.html', {'product': product, 'form': form})
+
+

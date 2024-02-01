@@ -1,5 +1,3 @@
-<!-- myapp/templates/product_detail.html -->
-
 {% extends 'base.html' %}
 
 {% block title %}Product Detail{% endblock %}
@@ -12,4 +10,17 @@
     <p>Цена: {{ object.price }}</p>
     <p>Количество: {{ object.quantity }}</p>
     <p>Дата добавления: {{ object.added_date }}</p>
+
+    {% if object.photo %}
+        <img src="{{ object.photo.url }}" alt="{{ object.name }}">
+    {% else %}
+        <p>Фото отсутствует</p>
+    {% endif %}
+
+    <!-- Форма для загрузки фотографии -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Загрузить фото</button>
+    </form>
 {% endblock %}

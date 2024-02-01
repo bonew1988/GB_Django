@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +26,21 @@ SECRET_KEY = 'django-insecure-j6h#tfgpbq3=549*zfsq$xsv2=+hrs!n9ya#j01ud2_iu6d8hf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '192.168.95.0/24',
+    'gb.bonew.ru',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    # '192.168.95.0/24',
+    # 'gb.bonew.ru',
+]
 
 # Application definition
 
@@ -38,9 +52,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -117,6 +133,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -135,14 +156,14 @@ LOGGING = {
         },
         'simple': {'format': '%(levelname)s %(message)s'},
     },
-    'handlers': {
+    'handlers': {   
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
         'file': {
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / '../myapp/logs/django.log',
+            'filename': BASE_DIR / 'logs' / '../logs/django.log',
             'formatter': 'verbose',
         },
     },
