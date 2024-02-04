@@ -6,3 +6,4 @@ admin.site.register(Client)
 admin.site.register(Order)
 
 # Register your models here.
+
